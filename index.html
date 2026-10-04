@@ -4,332 +4,135 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080d1b">
-<title>MONEY LIFE — Fase 1</title>
+<title>MONEY LIFE — Fase 2</title>
 <style>
 :root{--bg:#080d1b;--panel:#101a2d;--panel2:#14223a;--line:#263957;--text:#edf5ff;--muted:#91a6c5;--cyan:#43e7ff;--green:#4cff9a;--purple:#a78bfa;--red:#ff6b86;--gold:#ffd166}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top,#142746 0%,var(--bg) 52%,#060914 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.app{max-width:1120px;margin:auto;padding:18px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-.brand{display:flex;align-items:center;gap:11px}
-.logo{width:45px;height:45px;display:grid;place-items:center;border:1px solid #3a718b;border-radius:14px;background:linear-gradient(145deg,#15364d,#111a31);color:var(--cyan);font-size:24px;box-shadow:0 0 25px #43e7ff18}
-h1{font-size:clamp(20px,4vw,29px);margin:0;letter-spacing:2px}
-.subtitle{color:var(--muted);font-size:12px;margin-top:2px}
-.pill{border:1px solid var(--line);background:#101a2ddd;color:var(--muted);border-radius:99px;padding:8px 12px;font-size:12px}
-.hero{position:relative;overflow:hidden;border:1px solid #2b5270;border-radius:22px;padding:22px;background:linear-gradient(120deg,#10253e,#111a31 60%,#211a40);margin-bottom:16px}
-.hero:after{content:"";position:absolute;width:220px;height:220px;border:1px solid #43e7ff24;border-radius:50%;right:-65px;top:-85px;box-shadow:0 0 0 25px #43e7ff08,0 0 0 55px #43e7ff05;pointer-events:none}
-.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
-.hero h2{font-size:clamp(22px,4.5vw,34px);margin:8px 0}
-.hero p{max-width:600px;color:#afc2df;line-height:1.55;margin:0}
-.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
-.card{background:linear-gradient(145deg,#111d32ed,#0d1527f2);border:1px solid var(--line);border-radius:18px;padding:17px;min-width:0;box-shadow:0 10px 30px #00000012}
-.span-3{grid-column:span 3}.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
-.stat-label{color:var(--muted);font-size:12px;display:flex;align-items:center;gap:7px}
-.stat-value{font-size:clamp(23px,4vw,32px);font-weight:800;letter-spacing:-1px;margin-top:9px;overflow-wrap:anywhere}
-.green{color:var(--green)}.cyan{color:var(--cyan)}.gold{color:var(--gold)}.purple{color:var(--purple)}.red{color:var(--red)}
-.card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}
-.card h3{font-size:16px;margin:0}
-.small{font-size:12px;color:var(--muted);line-height:1.5}
-.btn{border:1px solid #3a5b7b;background:#172944;color:var(--text);padding:11px 14px;border-radius:11px;font-weight:700;transition:.18s}
-.btn:hover{transform:translateY(-1px);border-color:var(--cyan);box-shadow:0 0 20px #43e7ff14}
-.btn.primary{background:linear-gradient(100deg,#167c98,#2453a8);border-color:#3ccde8;color:white}
-.btn.good{background:#103b31;border-color:#286d56;color:var(--green)}
-.btn.danger{background:#3a1c2b;border-color:#71324a;color:#ff9db0}
-.btn.full{width:100%}
-.actions{display:flex;gap:9px;flex-wrap:wrap}
-.field{display:flex;flex-direction:column;gap:6px;margin-bottom:11px}
-label{font-size:12px;color:var(--muted)}
-input,select{width:100%;background:#091222;color:var(--text);border:1px solid #2b405e;border-radius:10px;padding:11px 12px;outline:none}
-input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #43e7ff12}
-.progress{height:10px;background:#26344d;border-radius:99px;overflow:hidden;margin:12px 0 8px}
-.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:99px;transition:width .4s}
-.goal-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.list{display:flex;flex-direction:column;gap:9px}
-.item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#0a1425;border:1px solid #21334e;border-radius:12px;padding:11px}
-.item-title{font-size:13px;font-weight:700}.item-meta{font-size:11px;color:var(--muted);margin-top:3px}
-.badge{font-size:10px;border:1px solid #31516a;border-radius:99px;padding:4px 8px;color:var(--cyan);white-space:nowrap}
-.nav{display:flex;gap:8px;overflow:auto;padding-bottom:3px;margin-bottom:15px}
-.nav button{white-space:nowrap}
-.nav button.active{border-color:var(--cyan);color:var(--cyan);background:#123047}
-.section{display:none}.section.active{display:block;animation:fade .25s ease}
-@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.tutorial-step{display:flex;gap:12px;align-items:flex-start;margin:13px 0}
-.step-num{flex:0 0 29px;height:29px;border-radius:10px;display:grid;place-items:center;background:#15354a;color:var(--cyan);font-weight:800}
-.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#172b40;border:1px solid #3b718b;color:white;padding:12px 16px;border-radius:12px;z-index:50;transition:.25s;max-width:90vw;text-align:center}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.modal-backdrop{position:fixed;inset:0;background:#020611cc;display:none;align-items:center;justify-content:center;padding:18px;z-index:40}
-.modal-backdrop.show{display:flex}
-.modal{width:min(500px,100%);background:#101a2d;border:1px solid #37617d;border-radius:20px;padding:22px;box-shadow:0 20px 80px #0009}
-.modal h2{margin:0 0 8px}.modal p{color:#afc2df;line-height:1.6}
-footer{padding:20px 4px 8px;color:#617895;text-align:center;font-size:11px}
-.empty{padding:18px;text-align:center;color:var(--muted);font-size:12px;border:1px dashed #30415c;border-radius:12px}
-@media(max-width:760px){.app{padding:12px}.span-3,.span-4,.span-5,.span-7,.span-8{grid-column:span 6}.span-12{grid-column:span 12}.hero{padding:18px}.topbar{align-items:flex-start}.pill{font-size:10px}}
-@media(max-width:480px){.span-3,.span-4,.span-5,.span-7,.span-8{grid-column:span 12}.stat-value{font-size:27px}.card{padding:15px}.topbar{flex-wrap:wrap}.pill{margin-left:auto}}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#142746 0%,var(--bg) 52%,#060914 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer}.app{max-width:1120px;margin:auto;padding:18px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:11px}.logo{width:45px;height:45px;display:grid;place-items:center;border:1px solid #3a718b;border-radius:14px;background:linear-gradient(145deg,#15364d,#111a31);color:var(--cyan);font-size:24px;box-shadow:0 0 25px #43e7ff18}
+h1{font-size:clamp(20px,4vw,29px);margin:0;letter-spacing:2px}.subtitle{color:var(--muted);font-size:12px;margin-top:2px}.pill{border:1px solid var(--line);background:#101a2ddd;color:var(--muted);border-radius:99px;padding:8px 12px;font-size:12px}
+.hero{position:relative;overflow:hidden;border:1px solid #2b5270;border-radius:22px;padding:22px;background:linear-gradient(120deg,#10253e,#111a31 60%,#211a40);margin-bottom:16px}.hero:after{content:"";position:absolute;width:220px;height:220px;border:1px solid #43e7ff24;border-radius:50%;right:-65px;top:-85px;box-shadow:0 0 0 25px #43e7ff08,0 0 0 55px #43e7ff05;pointer-events:none}.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h2{font-size:clamp(22px,4.5vw,34px);margin:8px 0}.hero p{max-width:680px;color:#afc2df;line-height:1.55;margin:0}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}.card{background:linear-gradient(145deg,#111d32ed,#0d1527f2);border:1px solid var(--line);border-radius:18px;padding:17px;min-width:0;box-shadow:0 10px 30px #00000012}.span-3{grid-column:span 3}.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
+.stat-label{color:var(--muted);font-size:12px;display:flex;align-items:center;gap:7px}.stat-value{font-size:clamp(23px,4vw,32px);font-weight:800;letter-spacing:-1px;margin-top:9px;overflow-wrap:anywhere}.green{color:var(--green)}.cyan{color:var(--cyan)}.gold{color:var(--gold)}.purple{color:var(--purple)}.red{color:var(--red)}.card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.card h3{font-size:16px;margin:0}.small{font-size:12px;color:var(--muted);line-height:1.5}
+.btn{border:1px solid #3a5b7b;background:#172944;color:var(--text);padding:11px 14px;border-radius:11px;font-weight:700;transition:.18s}.btn:hover{transform:translateY(-1px);border-color:var(--cyan);box-shadow:0 0 20px #43e7ff14}.btn.primary{background:linear-gradient(100deg,#167c98,#2453a8);border-color:#3ccde8;color:white}.btn.good{background:#103b31;border-color:#286d56;color:var(--green)}.btn.danger{background:#3a1c2b;border-color:#71324a;color:#ff9db0}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}.btn.full{width:100%}.actions{display:flex;gap:9px;flex-wrap:wrap}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:11px}label{font-size:12px;color:var(--muted)}input,select{width:100%;background:#091222;color:var(--text);border:1px solid #2b405e;border-radius:10px;padding:11px 12px;outline:none}input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #43e7ff12}.progress{height:10px;background:#26344d;border-radius:99px;overflow:hidden;margin:12px 0 8px}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:99px;transition:width .4s}.goal-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.list{display:flex;flex-direction:column;gap:9px}.item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#0a1425;border:1px solid #21334e;border-radius:12px;padding:11px}.item-title{font-size:13px;font-weight:700}.item-meta{font-size:11px;color:var(--muted);margin-top:3px}.badge{font-size:10px;border:1px solid #31516a;border-radius:99px;padding:4px 8px;color:var(--cyan);white-space:nowrap}
+.nav{display:flex;gap:8px;overflow:auto;padding-bottom:3px;margin-bottom:15px}.nav button{white-space:nowrap}.nav button.active{border-color:var(--cyan);color:var(--cyan);background:#123047}.section{display:none}.section.active{display:block;animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#172b40;border:1px solid #3b718b;color:white;padding:12px 16px;border-radius:12px;z-index:50;transition:.25s;max-width:90vw;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+.modal-backdrop{position:fixed;inset:0;background:#020611cc;display:none;align-items:center;justify-content:center;padding:18px;z-index:40}.modal-backdrop.show{display:flex}.modal{width:min(500px,100%);background:#101a2d;border:1px solid #37617d;border-radius:20px;padding:22px;box-shadow:0 20px 80px #0009}.modal h2{margin:0 0 8px}.modal p{color:#afc2df;line-height:1.6}footer{padding:20px 4px 8px;color:#617895;text-align:center;font-size:11px}.empty{padding:18px;text-align:center;color:var(--muted);font-size:12px;border:1px dashed #30415c;border-radius:12px}.product-icon{font-size:27px;flex:0 0 38px;text-align:center}.item-left{display:flex;align-items:center;gap:9px;min-width:0}.job-card{background:linear-gradient(145deg,#142541,#0b1528);border:1px solid #29425f;border-radius:14px;padding:14px}.job-card h4{margin:0 0 6px}.job-card p{margin:0 0 10px}.job-card .actions{align-items:center;justify-content:space-between}
+@media(max-width:760px){.app{padding:12px}.span-3,.span-4,.span-5,.span-6,.span-7,.span-8{grid-column:span 6}.span-12{grid-column:span 12}.hero{padding:18px}.topbar{align-items:flex-start}.pill{font-size:10px}}
+@media(max-width:480px){.span-3,.span-4,.span-5,.span-6,.span-7,.span-8{grid-column:span 12}.stat-value{font-size:27px}.card{padding:15px}.topbar{flex-wrap:wrap}.pill{margin-left:auto}.nav button{padding:10px 12px;font-size:12px}}
 </style>
 </head>
 <body>
 <div class="app">
-  <header class="topbar">
-    <div class="brand"><div class="logo">₥</div><div><h1>MONEY <span class="cyan">LIFE</span></h1><div class="subtitle">SIMULADOR ECONÓMICO · FASE 1</div></div></div>
-    <div class="pill">● MODO LOCAL · PARTIDA GUARDADA</div>
-  </header>
+<header class="topbar"><div class="brand"><div class="logo">₥</div><div><h1>MONEY <span class="cyan">LIFE</span></h1><div class="subtitle">SIMULADOR ECONÓMICO · FASE 2</div></div></div><div class="pill">● MODO LOCAL · PARTIDA GUARDADA</div></header>
+<section class="hero"><div class="eyebrow">Tu vida virtual, nuevas oportunidades</div><h2>Trabaja, ahorra y crea tu <span class="cyan">propio futuro.</span></h2><p>Conserva tu progreso de la Fase 1 y descubre empleos, pequeños negocios, una tienda y un inventario. Todo el dinero sigue siendo virtual.</p><div class="actions" style="margin-top:16px"><button class="btn primary" id="startTutorial">▶ Tutorial</button><button class="btn" data-go="trabajos">Buscar trabajo ↗</button></div></section>
+<nav class="nav" aria-label="Navegación principal">
+<button class="btn active" data-tab="inicio">⌂ Inicio</button><button class="btn" data-tab="economia">₥ Economía</button><button class="btn" data-tab="trabajos">⚒ Trabajos</button><button class="btn" data-tab="negocios">▦ Negocios</button><button class="btn" data-tab="tienda">▣ Tienda</button><button class="btn" data-tab="objetivos">◎ Objetivos</button><button class="btn" data-tab="misiones">✦ Misiones</button><button class="btn" data-tab="inventario">▤ Inventario</button><button class="btn" data-tab="historial">Historial</button>
+</nav>
 
-  <section class="hero">
-    <div class="eyebrow">Tu historia económica empieza aquí</div>
-    <h2>Construye tu <span class="cyan">futuro financiero.</span></h2>
-    <p>Gana dinero virtual, controla tus gastos, completa misiones y avanza hacia tus objetivos. Cada decisión cuenta.</p>
-    <div class="actions" style="margin-top:16px"><button class="btn primary" id="startTutorial">▶ Continuar tutorial</button><button class="btn" data-go="economia">Abrir economía ↗</button></div>
-  </section>
+<section class="section active" id="tab-inicio"><div class="grid">
+<article class="card span-3"><div class="stat-label">◈ Dinero disponible</div><div class="stat-value cyan" id="balanceStat">S/ 0.00</div><div class="small">Saldo virtual de tu partida</div></article>
+<article class="card span-3"><div class="stat-label">↗ Ganancias totales</div><div class="stat-value green" id="incomeStat">S/ 0.00</div><div class="small">Ingresos acumulados</div></article>
+<article class="card span-3"><div class="stat-label">↘ Gastos totales</div><div class="stat-value red" id="expenseStat">S/ 0.00</div><div class="small">Gastos acumulados</div></article>
+<article class="card span-3"><div class="stat-label">⬡ Nivel de jugador</div><div class="stat-value purple" id="levelStat">Nivel 1</div><div class="small" id="xpText">0 / 100 XP</div><div class="progress"><div id="xpBar"></div></div></article>
+<article class="card span-7"><div class="card-head"><h3>◎ Objetivo principal</h3><span class="badge">META ACTIVA</span></div><div class="goal-row"><div><div class="item-title" id="homeGoalName">Mi primer objetivo</div><div class="small" id="homeGoalHint">Define una meta en Objetivos.</div></div><div class="stat-value gold" style="font-size:19px" id="goalPercent">0%</div></div><div class="progress"><div id="goalBar"></div></div><div class="goal-row small"><span id="goalSaved">S/ 0.00 disponibles</span><span id="goalTarget">Meta: S/ 500.00</span></div></article>
+<article class="card span-5"><div class="card-head"><h3>✦ Tu carrera</h3><span class="badge">FASE 2</span></div><div class="item-title" id="careerTitle">Sin empleo activo</div><p class="small" id="careerText">Elige un trabajo para ganar dinero virtual.</p><button class="btn good full" data-go="trabajos">Ver trabajos</button></article>
+<article class="card span-12"><div class="card-head"><h3>⌁ Actividad reciente</h3><span class="small">Últimos movimientos</span></div><div class="list" id="recentList"><div class="empty">Todavía no hay movimientos.</div></div></article>
+</div></section>
 
-  <nav class="nav" aria-label="Navegación principal">
-    <button class="btn active" data-tab="inicio">⌂ Inicio</button>
-    <button class="btn" data-tab="economia">₥ Economía</button>
-    <button class="btn" data-tab="objetivos">◎ Objetivos</button>
-    <button class="btn" data-tab="misiones">✦ Misiones</button>
-    <button class="btn" data-tab="historial">▤ Historial</button>
-  </nav>
+<section class="section" id="tab-economia"><div class="grid">
+<article class="card span-5"><div class="card-head"><h3>＋ Registrar movimiento</h3><span class="badge">SIMULACIÓN</span></div><div class="field"><label for="moveType">Tipo</label><select id="moveType"><option value="income">Ganancia virtual (+)</option><option value="expense">Gasto virtual (−)</option></select></div><div class="field"><label for="moveAmount">Cantidad en soles virtuales</label><input id="moveAmount" type="number" min="0.01" max="1000000" step="0.01" placeholder="Ej. 20.00" inputmode="decimal"></div><div class="field"><label for="moveDescription">Descripción</label><input id="moveDescription" maxlength="70" placeholder="Ej. Ganancia de prueba"></div><button class="btn primary full" id="addMovement">Guardar movimiento</button><p class="small">Los gastos no pueden superar tu saldo. Los trabajos y negocios registran sus propios movimientos.</p></article>
+<article class="card span-7"><div class="card-head"><h3>▤ Resumen económico</h3><span class="badge">TOTAL</span></div><div class="list"><div class="item"><div><div class="item-title">Dinero disponible</div><div class="item-meta">Saldo actual</div></div><strong class="cyan" id="balanceSummary">S/ 0.00</strong></div><div class="item"><div><div class="item-title">Ganancias acumuladas</div><div class="item-meta">Ingresos virtuales</div></div><strong class="green" id="incomeSummary">S/ 0.00</strong></div><div class="item"><div><div class="item-title">Gastos acumulados</div><div class="item-meta">Gastos virtuales</div></div><strong class="red" id="expenseSummary">S/ 0.00</strong></div><div class="item"><div><div class="item-title">Balance neto</div><div class="item-meta">Ganancias menos gastos</div></div><strong id="netSummary">S/ 0.00</strong></div></div></article>
+<article class="card span-12"><div class="small">Aviso: MONEY LIFE usa dinero ficticio dentro del navegador. No está conectado a bancos, no procesa pagos reales y no permite retirar dinero.</div></article>
+</div></section>
 
-  <section class="section active" id="tab-inicio">
-    <div class="grid">
-      <article class="card span-3"><div class="stat-label">◈ Dinero disponible</div><div class="stat-value cyan" id="balanceStat">S/ 0.00</div><div class="small">Dinero virtual de tu partida</div></article>
-      <article class="card span-3"><div class="stat-label">↗ Ganancias totales</div><div class="stat-value green" id="incomeStat">S/ 0.00</div><div class="small">Todo lo ganado en esta partida</div></article>
-      <article class="card span-3"><div class="stat-label">↘ Gastos totales</div><div class="stat-value red" id="expenseStat">S/ 0.00</div><div class="small">Todo lo gastado en esta partida</div></article>
-      <article class="card span-3"><div class="stat-label">⬡ Nivel de jugador</div><div class="stat-value purple" id="levelStat">Nivel 1</div><div class="small" id="xpText">0 / 100 XP</div><div class="progress"><div id="xpBar"></div></div></article>
+<section class="section" id="tab-trabajos"><div class="grid"><article class="card span-12"><div class="card-head"><h3>⚒ Centro de empleos</h3><span class="badge">TRABAJO VIRTUAL</span></div><p class="small">Elige una ocupación y pulsa “Trabajar” para recibir su recompensa virtual. Cada trabajo tiene un tiempo de espera simulado de 10 segundos para evitar pulsaciones repetidas.</p><div class="grid" id="jobList"></div></article></div></section>
 
-      <article class="card span-7">
-        <div class="card-head"><h3>◎ Objetivo principal</h3><span class="badge">META ACTIVA</span></div>
-        <div class="goal-row"><div><div class="item-title" id="homeGoalName">Mi primer objetivo</div><div class="small" id="homeGoalHint">Define una meta en la sección Objetivos.</div></div><div class="stat-value gold" style="font-size:19px" id="goalPercent">0%</div></div>
-        <div class="progress"><div id="goalBar"></div></div>
-        <div class="goal-row small"><span id="goalSaved">S/ 0.00 guardados</span><span id="goalTarget">Meta: S/ 500.00</span></div>
-      </article>
-      <article class="card span-5">
-        <div class="card-head"><h3>✦ Misión destacada</h3><span class="badge">DIARIA</span></div>
-        <div class="item-title">Primer ingreso</div><p class="small">Registra una ganancia virtual para completar tu primera misión y recibir experiencia.</p>
-        <button class="btn good full" id="missionShortcut">Ir a misiones</button>
-      </article>
+<section class="section" id="tab-negocios"><div class="grid"><article class="card span-5"><div class="card-head"><h3>▦ Crear un negocio</h3><span class="badge">INVERSIÓN</span></div><div class="field"><label for="businessType">Tipo de negocio</label><select id="businessType"><option value="snack">Puesto de snacks — coste S/ 150</option><option value="delivery">Servicio de entregas — coste S/ 350</option><option value="tech">Tienda tecnológica — coste S/ 800</option></select></div><button class="btn primary full" id="buyBusiness">Comprar negocio</button><p class="small">Un negocio produce una recompensa virtual cada vez que cobras sus ganancias. Comprar un negocio no garantiza ganancias reales.</p></article><article class="card span-7"><div class="card-head"><h3>Mis negocios</h3><span class="badge" id="businessCount">0 ACTIVOS</span></div><div class="list" id="businessList"><div class="empty">Todavía no tienes negocios. Ahorra y compra tu primero.</div></div></article></div></section>
 
-      <article class="card span-12">
-        <div class="card-head"><h3>⌁ Actividad reciente</h3><span class="small">Últimos movimientos</span></div>
-        <div class="list" id="recentList"><div class="empty">Todavía no hay movimientos. Registra tu primera ganancia en Economía.</div></div>
-      </article>
-    </div>
-  </section>
+<section class="section" id="tab-tienda"><div class="grid"><article class="card span-12"><div class="card-head"><h3>▣ Tienda virtual</h3><span class="badge">OBJETOS Y MEJORAS</span></div><p class="small">Compra artículos con tu saldo virtual. Los objetos adquiridos se guardan en tu inventario. Los precios son parte de la simulación.</p><div class="grid" id="shopList"></div></article></div></section>
 
-  <section class="section" id="tab-economia">
-    <div class="grid">
-      <article class="card span-5">
-        <div class="card-head"><h3>＋ Registrar movimiento</h3><span class="badge">SIMULACIÓN</span></div>
-        <div class="field"><label for="moveType">Tipo de movimiento</label><select id="moveType"><option value="income">Ganancia virtual (+)</option><option value="expense">Gasto virtual (−)</option></select></div>
-        <div class="field"><label for="moveAmount">Cantidad en soles virtuales</label><input id="moveAmount" type="number" min="0.01" max="1000000" step="0.01" placeholder="Ej. 20.00" inputmode="decimal"></div>
-        <div class="field"><label for="moveDescription">Descripción</label><input id="moveDescription" maxlength="70" placeholder="Ej. Trabajo de prueba"></div>
-        <button class="btn primary full" id="addMovement">Guardar movimiento</button>
-        <p class="small">Consejo: comienza con una ganancia virtual. Los gastos no pueden superar tu saldo disponible.</p>
-      </article>
-      <article class="card span-7">
-        <div class="card-head"><h3>▤ Resumen de partida</h3><span class="badge">TOTAL</span></div>
-        <div class="list">
-          <div class="item"><div><div class="item-title">Dinero disponible</div><div class="item-meta">Saldo actual de la partida</div></div><strong class="cyan" id="balanceSummary">S/ 0.00</strong></div>
-          <div class="item"><div><div class="item-title">Ganancias acumuladas</div><div class="item-meta">Suma de todos los ingresos virtuales</div></div><strong class="green" id="incomeSummary">S/ 0.00</strong></div>
-          <div class="item"><div><div class="item-title">Gastos acumulados</div><div class="item-meta">Suma de todos los gastos virtuales</div></div><strong class="red" id="expenseSummary">S/ 0.00</strong></div>
-          <div class="item"><div><div class="item-title">Balance neto</div><div class="item-meta">Ganancias menos gastos</div></div><strong id="netSummary">S/ 0.00</strong></div>
-        </div>
-      </article>
-      <article class="card span-12">
-        <div class="card-head"><h3>⚠ Economía del juego</h3></div>
-        <p class="small">Todo el dinero de MONEY LIFE es ficticio y solo existe dentro de tu partida. No representa dinero real, no está conectado a bancos y no permite retirar dinero.</p>
-      </article>
-    </div>
-  </section>
+<section class="section" id="tab-objetivos"><div class="grid"><article class="card span-5"><div class="card-head"><h3>◎ Crear o editar objetivo</h3></div><div class="field"><label for="goalName">Nombre de tu objetivo</label><input id="goalName" maxlength="55" placeholder="Ej. Comprar un celular gamer"></div><div class="field"><label for="goalAmount">Precio objetivo (S/ virtuales)</label><input id="goalAmount" type="number" min="1" max="10000000" step="0.01" placeholder="Ej. 700" inputmode="decimal"></div><button class="btn primary full" id="saveGoal">Guardar objetivo</button><p class="small">El progreso compara tu saldo con el precio que hayas definido.</p></article><article class="card span-7"><div class="card-head"><h3>⌁ Progreso de tu objetivo</h3><span class="badge">EN CURSO</span></div><div class="stat-value gold" id="goalPagePercent">0%</div><div class="progress"><div id="goalPageBar"></div></div><div class="goal-row small"><span id="goalPageBalance">Saldo: S/ 0.00</span><span id="goalPageTarget">Objetivo: S/ 500.00</span></div><p class="small" id="goalStatus" style="margin-top:15px">Cada ganancia virtual te acerca a tu objetivo.</p></article></div></section>
 
-  <section class="section" id="tab-objetivos">
-    <div class="grid">
-      <article class="card span-5">
-        <div class="card-head"><h3>◎ Crear o editar objetivo</h3></div>
-        <div class="field"><label for="goalName">Nombre de tu objetivo</label><input id="goalName" maxlength="55" placeholder="Ej. Comprar un celular gamer"></div>
-        <div class="field"><label for="goalAmount">Precio objetivo (S/ virtuales)</label><input id="goalAmount" type="number" min="1" max="10000000" step="0.01" placeholder="Ej. 700" inputmode="decimal"></div>
-        <button class="btn primary full" id="saveGoal">Guardar objetivo</button>
-        <p class="small">La barra de progreso compara tu saldo actual con el precio que hayas definido.</p>
-      </article>
-      <article class="card span-7">
-        <div class="card-head"><h3>⌁ Progreso de tu objetivo</h3><span class="badge">EN CURSO</span></div>
-        <div class="stat-value gold" id="goalPagePercent">0%</div>
-        <div class="progress"><div id="goalPageBar"></div></div>
-        <div class="goal-row small"><span id="goalPageBalance">Saldo: S/ 0.00</span><span id="goalPageTarget">Objetivo: S/ 500.00</span></div>
-        <p class="small" id="goalStatus" style="margin-top:15px">Cada ganancia virtual te acerca a tu objetivo.</p>
-      </article>
-    </div>
-  </section>
+<section class="section" id="tab-misiones"><div class="grid"><article class="card span-12"><div class="card-head"><h3>✦ Misiones de MONEY LIFE</h3><span class="badge">RECOMPENSAS XP</span></div><p class="small">Completa tareas para ganar experiencia. Algunas misiones requieren probar funciones nuevas de la Fase 2.</p><div class="list" id="missionList"></div></article></div></section>
 
-  <section class="section" id="tab-misiones">
-    <div class="grid">
-      <article class="card span-12">
-        <div class="card-head"><h3>✦ Misiones de iniciación</h3><span class="badge">FASE 1</span></div>
-        <p class="small">Completa objetivos sencillos para conseguir XP. En esta fase, las recompensas son experiencia; las ganancias de dinero se registran desde Economía.</p>
-        <div class="list" id="missionList"></div>
-      </article>
-    </div>
-  </section>
+<section class="section" id="tab-inventario"><div class="grid"><article class="card span-12"><div class="card-head"><h3>▤ Mi inventario</h3><span class="badge" id="inventoryCount">0 OBJETOS</span></div><p class="small">Aquí aparecen los objetos que compres en la tienda virtual. En esta fase son artículos de colección y no cambian atributos del personaje.</p><div class="list" id="inventoryList"><div class="empty">Tu inventario está vacío. Visita la tienda.</div></div></article></div></section>
 
-  <section class="section" id="tab-historial">
-    <div class="grid">
-      <article class="card span-12">
-        <div class="card-head"><h3>▤ Historial completo</h3><button class="btn danger" id="clearHistory">Reiniciar partida</button></div>
-        <p class="small">Los movimientos se guardan en este navegador. Reiniciar elimina el progreso local de MONEY LIFE en este dispositivo.</p>
-        <div class="list" id="historyList"><div class="empty">No hay movimientos registrados.</div></div>
-      </article>
-    </div>
-  </section>
-
-  <footer>MONEY LIFE · FASE 1 · Juego independiente de simulación económica · Guardado local en este navegador</footer>
+<section class="section" id="tab-historial"><div class="grid"><article class="card span-12"><div class="card-head"><h3>▤ Historial completo</h3><button class="btn danger" id="clearHistory">Reiniciar partida</button></div><p class="small">El guardado es local en este navegador. Reiniciar elimina todo el progreso de MONEY LIFE en este dispositivo. Hazlo solo si estás seguro.</p><div class="list" id="historyList"><div class="empty">No hay movimientos registrados.</div></div></article></div></section>
+<footer>MONEY LIFE · FASE 2 · Simulador económico independiente · Guardado local en este navegador</footer>
 </div>
 
-<div class="modal-backdrop" id="tutorialModal" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
-  <div class="modal">
-    <div class="eyebrow">TUTORIAL INTERACTIVO · <span id="tutorialCount">1/3</span></div>
-    <h2 id="tutorialTitle">Bienvenido a MONEY LIFE</h2>
-    <p id="tutorialBody">Este es tu simulador económico. Aquí usarás dinero virtual para practicar decisiones y alcanzar objetivos.</p>
-    <div class="progress"><div id="tutorialBar" style="width:33%"></div></div>
-    <div class="actions" style="justify-content:space-between;margin-top:18px"><button class="btn" id="skipTutorial">Cerrar tutorial</button><button class="btn primary" id="nextTutorial">Siguiente →</button></div>
-  </div>
-</div>
+<div class="modal-backdrop" id="tutorialModal" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle"><div class="modal"><div class="eyebrow">TUTORIAL INTERACTIVO · <span id="tutorialCount">1/4</span></div><h2 id="tutorialTitle">Bienvenido a MONEY LIFE</h2><p id="tutorialBody">Tu simulador económico.</p><div class="progress"><div id="tutorialBar" style="width:25%"></div></div><div class="actions" style="justify-content:space-between;margin-top:18px"><button class="btn" id="skipTutorial">Cerrar tutorial</button><button class="btn primary" id="nextTutorial">Siguiente →</button></div></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (() => {
-  "use strict";
-  const STORAGE_KEY = "moneyLifePhase1Save_v1";
-  const money = n => "S/ " + Number(n || 0).toLocaleString("es-PE", {minimumFractionDigits:2, maximumFractionDigits:2});
-  const now = () => new Date().toLocaleString("es-PE", {dateStyle:"short", timeStyle:"short"});
-  const defaultState = () => ({
-    balance:0, income:0, expenses:0, xp:0, level:1,
-    goal:{name:"Mi primer objetivo", target:500},
-    movements:[], completedMissions:[], tutorialSeen:false
-  });
-  let state = loadState();
-  function loadState(){
-    try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if(!raw) return defaultState();
-      const parsed = JSON.parse(raw);
-      return {...defaultState(), ...parsed, goal:{...defaultState().goal, ...(parsed.goal||{})},
-        movements:Array.isArray(parsed.movements)?parsed.movements:[],
-        completedMissions:Array.isArray(parsed.completedMissions)?parsed.completedMissions:[]};
-    }catch(e){ return defaultState(); }
-  }
-  function saveState(){ try{localStorage.setItem(STORAGE_KEY, JSON.stringify(state));}catch(e){showToast("No se pudo guardar en este navegador.");} }
-  function showToast(message){
-    const el=document.getElementById("toast"); el.textContent=message; el.classList.add("show");
-    clearTimeout(showToast.timer); showToast.timer=setTimeout(()=>el.classList.remove("show"),2600);
-  }
-  function addXP(amount){
-    state.xp += amount;
-    while(state.xp >= 100){state.xp -= 100; state.level += 1; showToast("¡Subiste al nivel "+state.level+"!");}
-  }
-  function addMovement(type, amount, description){
-    const entry={id:Date.now()+Math.random(), type, amount, description, date:now()};
-    if(type==="income"){state.balance+=amount;state.income+=amount;addXP(10);}
-    else{state.balance-=amount;state.expenses+=amount;addXP(3);}
-    state.movements.unshift(entry);
-    saveState(); render();
-  }
-  function setText(id, text){const el=document.getElementById(id);if(el)el.textContent=text;}
-  function render(){
-    setText("balanceStat",money(state.balance));setText("incomeStat",money(state.income));setText("expenseStat",money(state.expenses));
-    setText("balanceSummary",money(state.balance));setText("incomeSummary",money(state.income));setText("expenseSummary",money(state.expenses));
-    setText("netSummary",money(state.income-state.expenses));setText("levelStat","Nivel "+state.level);
-    setText("xpText",state.xp+" / 100 XP");document.getElementById("xpBar").style.width=state.xp+"%";
-    setText("homeGoalName",state.goal.name);setText("homeGoalHint","Sigue avanzando para completar tu meta.");
-    setText("goalTarget","Meta: "+money(state.goal.target));setText("goalPageTarget","Objetivo: "+money(state.goal.target));
-    setText("goalSaved",money(state.balance)+" disponibles");setText("goalPageBalance","Saldo: "+money(state.balance));
-    const pct=state.goal.target>0?Math.min(100,Math.max(0,state.balance/state.goal.target*100)):0;
-    setText("goalPercent",Math.floor(pct)+"%");setText("goalPagePercent",Math.floor(pct)+"%");
-    document.getElementById("goalBar").style.width=pct+"%";document.getElementById("goalPageBar").style.width=pct+"%";
-    setText("goalStatus",pct>=100?"¡Objetivo alcanzado! Puedes crear una nueva meta cuando quieras.":"Te faltan "+money(Math.max(0,state.goal.target-state.balance))+" para alcanzar tu objetivo.");
-    renderMovements();renderMissions();
-  }
-  function renderMovements(){
-    const recent=document.getElementById("recentList"),history=document.getElementById("historyList");
-    const makeItem=m=>`<div class="item"><div style="min-width:0"><div class="item-title">${escapeHTML(m.description)}</div><div class="item-meta">${escapeHTML(m.date)} · ${m.type==="income"?"Ganancia":"Gasto"}</div></div><strong class="${m.type==="income"?"green":"red"}">${m.type==="income"?"+":"−"}${money(m.amount)}</strong></div>`;
-    recent.innerHTML=state.movements.length?state.movements.slice(0,4).map(makeItem).join(""):'<div class="empty">Todavía no hay movimientos. Registra tu primera ganancia en Economía.</div>';
-    history.innerHTML=state.movements.length?state.movements.map(makeItem).join(""):'<div class="empty">No hay movimientos registrados.</div>';
-  }
-  const missions=[
-    {id:"first_income",title:"Primer ingreso",desc:"Registra una ganancia virtual.",xp:20,check:s=>s.income>0},
-    {id:"first_expense",title:"Aprende a gastar",desc:"Registra tu primer gasto virtual.",xp:15,check:s=>s.expenses>0},
-    {id:"save_100",title:"Pequeño ahorrador",desc:"Alcanza un saldo de S/100 virtuales.",xp:25,check:s=>s.balance>=100},
-    {id:"set_goal",title:"Sueño definido",desc:"Guarda un objetivo económico.",xp:15,check:s=>s.goal.name!=="Mi primer objetivo"||s.goal.target!==500}
-  ];
-  function renderMissions(){
-    const list=document.getElementById("missionList");
-    list.innerHTML=missions.map(m=>{
-      const done=state.completedMissions.includes(m.id);
-      const ready=m.check(state);
-      return `<div class="item"><div style="min-width:0"><div class="item-title">${done?"✓ ":""}${m.title}</div><div class="item-meta">${m.desc} · Recompensa: ${m.xp} XP</div></div><button class="btn ${done?"":"good"}" data-claim="${m.id}" ${done||!ready?"disabled":""}>${done?"Completada":ready?"Reclamar XP":"En progreso"}</button></div>`;
-    }).join("");
-    list.querySelectorAll("[data-claim]").forEach(btn=>btn.addEventListener("click",()=>{
-      const m=missions.find(x=>x.id===btn.dataset.claim);
-      if(!m||state.completedMissions.includes(m.id)||!m.check(state))return;
-      state.completedMissions.push(m.id);addXP(m.xp);saveState();render();showToast("Misión completada: +"+m.xp+" XP");
-    }));
-  }
-  function escapeHTML(str){return String(str).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-  function goTab(tab){
-    document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id==="tab-"+tab));
-    document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-  document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>goTab(b.dataset.tab)));
-  document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>goTab(b.dataset.go)));
-  document.getElementById("missionShortcut").addEventListener("click",()=>goTab("misiones"));
-
-  document.getElementById("addMovement").addEventListener("click",()=>{
-    const type=document.getElementById("moveType").value;
-    const amount=Number(document.getElementById("moveAmount").value);
-    const description=document.getElementById("moveDescription").value.trim()||(type==="income"?"Ganancia virtual":"Gasto virtual");
-    if(!Number.isFinite(amount)||amount<=0||amount>1000000){showToast("Escribe una cantidad mayor que cero y menor o igual a S/1,000,000.");return;}
-    if(type==="expense"&&amount>state.balance){showToast("Saldo insuficiente. Registra una ganancia antes del gasto.");return;}
-    addMovement(type,Math.round(amount*100)/100,description.slice(0,70));
-    document.getElementById("moveAmount").value="";document.getElementById("moveDescription").value="";
-    showToast(type==="income"?"Ganancia registrada. ¡Buen trabajo!":"Gasto registrado correctamente.");
-  });
-  document.getElementById("saveGoal").addEventListener("click",()=>{
-    const name=document.getElementById("goalName").value.trim();
-    const target=Number(document.getElementById("goalAmount").value);
-    if(!name){showToast("Escribe un nombre para tu objetivo.");return;}
-    if(!Number.isFinite(target)||target<=0||target>10000000){showToast("Escribe un precio objetivo válido.");return;}
-    state.goal={name:name.slice(0,55),target:Math.round(target*100)/100};
-    addXP(5);saveState();render();showToast("Objetivo guardado. +5 XP");
-  });
-  document.getElementById("clearHistory").addEventListener("click",()=>{
-    if(!confirm("¿Seguro que quieres reiniciar toda la partida local? Se borrarán saldo, movimientos, nivel, objetivo y misiones."))return;
-    state=defaultState();saveState();render();showToast("Partida reiniciada.");
-  });
-
-  const tutorialSteps=[
-    {title:"Bienvenido a MONEY LIFE",body:"Este es tu simulador económico. Todo el dinero es virtual: aquí practicarás decisiones, completarás misiones y alcanzarás objetivos."},
-    {title:"Gana y administra",body:"En Economía puedes registrar ganancias y gastos. Las ganancias aumentan tu saldo; los gastos lo reducen. No puedes gastar más de lo que tienes."},
-    {title:"Define tu objetivo",body:"En Objetivos escribe una meta, por ejemplo, un celular gamer, y su precio virtual. Tu progreso se actualizará según el saldo disponible. ¡Ya puedes empezar!"}
-  ];
-  let tutorialIndex=0;
-  const modal=document.getElementById("tutorialModal");
-  function openTutorial(){tutorialIndex=0;showTutorialStep();modal.classList.add("show");}
-  function showTutorialStep(){
-    const s=tutorialSteps[tutorialIndex];setText("tutorialTitle",s.title);setText("tutorialBody",s.body);
-    setText("tutorialCount",(tutorialIndex+1)+"/"+tutorialSteps.length);
-    document.getElementById("tutorialBar").style.width=((tutorialIndex+1)/tutorialSteps.length*100)+"%";
-    setText("nextTutorial",tutorialIndex===tutorialSteps.length-1?"¡Empezar a jugar!":"Siguiente →");
-  }
-  function closeTutorial(){modal.classList.remove("show");state.tutorialSeen=true;saveState();}
-  document.getElementById("startTutorial").addEventListener("click",openTutorial);
-  document.getElementById("skipTutorial").addEventListener("click",closeTutorial);
-  document.getElementById("nextTutorial").addEventListener("click",()=>{
-    if(tutorialIndex<tutorialSteps.length-1){tutorialIndex++;showTutorialStep();}
-    else{closeTutorial();goTab("inicio");showToast("Tutorial completado. ¡A jugar!");}
-  });
-  render();
-  if(!state.tutorialSeen)openTutorial();
+"use strict";
+const STORAGE_KEY="moneyLifePhase1Save_v1";
+const money=n=>"S/ "+Number(n||0).toLocaleString("es-PE",{minimumFractionDigits:2,maximumFractionDigits:2});
+const now=()=>new Date().toLocaleString("es-PE",{dateStyle:"short",timeStyle:"short"});
+const defaults=()=>({balance:0,income:0,expenses:0,xp:0,level:1,goal:{name:"Mi primer objetivo",target:500},movements:[],completedMissions:[],tutorialSeen:false,activeJob:null,lastJobAt:0,businesses:[],inventory:[],purchases:[],workCount:0});
+function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return defaults();const p=JSON.parse(raw);return {...defaults(),...p,goal:{...defaults().goal,...(p.goal||{})},movements:Array.isArray(p.movements)?p.movements:[],completedMissions:Array.isArray(p.completedMissions)?p.completedMissions:[],businesses:Array.isArray(p.businesses)?p.businesses:[],inventory:Array.isArray(p.inventory)?p.inventory:[],purchases:Array.isArray(p.purchases)?p.purchases:[]};}catch(e){return defaults();}}
+let state=loadState();
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){showToast("No se pudo guardar en este navegador.");}}
+function showToast(message){const el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>el.classList.remove("show"),2600);}
+function setText(id,text){const el=document.getElementById(id);if(el)el.textContent=text;}
+function addXP(amount){state.xp+=amount;while(state.xp>=100){state.xp-=100;state.level+=1;showToast("¡Subiste al nivel "+state.level+"!");}}
+function addMovement(type,amount,description){const entry={id:Date.now()+Math.random(),type,amount,description,date:now()};if(type==="income"){state.balance+=amount;state.income+=amount;addXP(10);}else{state.balance-=amount;state.expenses+=amount;addXP(3);}state.movements.unshift(entry);saveState();render();}
+function escapeHTML(str){return String(str).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+const jobs=[
+{id:"helper",name:"Ayudante de tienda",icon:"🛍️",desc:"Organiza productos y ayuda a los clientes.",pay:35,xp:8},
+{id:"delivery",name:"Repartidor en bicicleta",icon:"🚲",desc:"Entrega pedidos por la ciudad virtual.",pay:50,xp:10},
+{id:"designer",name:"Diseñador digital",icon:"💻",desc:"Crea diseños para clientes ficticios.",pay:75,xp:12},
+{id:"programmer",name:"Programador junior",icon:"🧑‍💻",desc:"Resuelve tareas digitales simuladas.",pay:110,xp:15},
+{id:"manager",name:"Coordinador de proyectos",icon:"📊",desc:"Organiza equipos y objetivos.",pay:160,xp:18}
+];
+const businessTypes={
+snack:{name:"Puesto de snacks",icon:"🍿",cost:150,reward:28,desc:"Pequeño puesto de comida y bebidas."},
+delivery:{name:"Servicio de entregas",icon:"🛵",cost:350,reward:65,desc:"Un pequeño negocio de reparto."},
+tech:{name:"Tienda tecnológica",icon:"🖥️",cost:800,reward:145,desc:"Venta de accesorios tecnológicos ficticios."}
+};
+const products=[
+{id:"headphones",name:"Auriculares gamer",icon:"🎧",price:90,desc:"Un accesorio para tu colección."},
+{id:"sneakers",name:"Zapatillas urbanas",icon:"👟",price:130,desc:"Estilo para tu vida virtual."},
+{id:"backpack",name:"Mochila premium",icon:"🎒",price:75,desc:"Guarda tus objetos favoritos."},
+{id:"tablet",name:"Tablet digital",icon:"📱",price:260,desc:"Un dispositivo virtual de colección."},
+{id:"gaming_pc",name:"PC gamer futurista",icon:"🖥️",price:650,desc:"El objeto premium de esta tienda."},
+{id:"watch",name:"Reloj inteligente",icon:"⌚",price:180,desc:"Un reloj para tu inventario."}
+];
+function buyProduct(id){const p=products.find(x=>x.id===id);if(!p)return;if(state.balance<p.price){showToast("Saldo insuficiente para comprar "+p.name+".");return;}state.balance-=p.price;state.expenses+=p.price;state.inventory.push({id:p.id,name:p.name,icon:p.icon,price:p.price,boughtAt:now()});state.purchases.unshift({name:p.name,price:p.price,date:now()});state.movements.unshift({id:Date.now()+Math.random(),type:"expense",amount:p.price,description:"Compra: "+p.name,date:now()});addXP(3);saveState();render();showToast("¡Compraste "+p.name+"! Revisa tu inventario.");}
+function renderJobs(){const list=document.getElementById("jobList");list.innerHTML=jobs.map(j=>`<div class="job-card" style="grid-column:span 6"><div class="item-left"><div class="product-icon">${j.icon}</div><div><h4>${j.name}</h4><div class="small">${j.desc}</div></div></div><div class="goal-row" style="margin-top:12px"><strong class="green">${money(j.pay)} / turno</strong><span class="badge">+${j.xp} XP</span></div><button class="btn good full" style="margin-top:10px" data-work="${j.id}">Trabajar</button></div>`).join("");list.querySelectorAll("[data-work]").forEach(b=>b.addEventListener("click",()=>workJob(b.dataset.work)));}
+function workJob(id){const j=jobs.find(x=>x.id===id);if(!j)return;const nowMs=Date.now();if(nowMs-(state.lastJobAt||0)<10000){const left=Math.ceil((10000-(nowMs-state.lastJobAt))/1000);showToast("Descansa "+left+" segundos antes de otro turno.");return;}state.activeJob=j.id;state.lastJobAt=nowMs;state.workCount=(state.workCount||0)+1;addMovement("income",j.pay,"Trabajo: "+j.name);addXP(j.xp);saveState();render();showToast("Turno completado: +"+money(j.pay)+" virtuales.");}
+function renderBusinesses(){const list=document.getElementById("businessList");setText("businessCount",state.businesses.length+" ACTIVOS");if(!state.businesses.length){list.innerHTML='<div class="empty">Todavía no tienes negocios. Ahorra y compra tu primero.</div>';return;}list.innerHTML=state.businesses.map((b,i)=>`<div class="item"><div class="item-left"><div class="product-icon">${b.icon}</div><div><div class="item-title">${escapeHTML(b.name)}</div><div class="item-meta">Genera ${money(b.reward)} por cobro · Coste inicial ${money(b.cost)}</div></div></div><button class="btn good" data-collect="${i}">Cobrar ${money(b.reward)}</button></div>`).join("");list.querySelectorAll("[data-collect]").forEach(btn=>btn.addEventListener("click",()=>{const b=state.businesses[Number(btn.dataset.collect)];if(!b)return;addMovement("income",b.reward,"Ganancias de negocio: "+b.name);addXP(5);saveState();render();showToast("Ganancias del negocio cobradas.");}));}
+function renderShop(){const list=document.getElementById("shopList");list.innerHTML=products.map(p=>{const owned=state.inventory.some(i=>i.id===p.id);return `<div class="job-card" style="grid-column:span 4"><div class="product-icon" style="font-size:34px;text-align:left">${p.icon}</div><h4 style="margin:6px 0">${p.name}</h4><p class="small">${p.desc}</p><div class="goal-row"><strong class="gold">${money(p.price)}</strong><span class="badge">${owned?"YA COMPRADO":"OBJETO"}</span></div><button class="btn ${owned?"":"primary"} full" style="margin-top:10px" data-buy="${p.id}" ${owned?"disabled":""}>${owned?"En inventario":"Comprar"}</button></div>`;}).join("");list.querySelectorAll("[data-buy]").forEach(b=>b.addEventListener("click",()=>buyProduct(b.dataset.buy)));}
+function renderInventory(){const list=document.getElementById("inventoryList");setText("inventoryCount",state.inventory.length+" OBJETOS");if(!state.inventory.length){list.innerHTML='<div class="empty">Tu inventario está vacío. Visita la tienda.</div>';return;}list.innerHTML=state.inventory.map(i=>`<div class="item"><div class="item-left"><div class="product-icon">${i.icon}</div><div><div class="item-title">${escapeHTML(i.name)}</div><div class="item-meta">Comprado: ${escapeHTML(i.boughtAt||"Fecha anterior")} · ${money(i.price)}</div></div></div><span class="badge">PROPIEDAD</span></div>`).join("");}
+function renderMissions(){const missions=[
+{id:"first_income",title:"Primer ingreso",desc:"Registra una ganancia virtual.",xp:20,check:s=>s.income>0},
+{id:"first_expense",title:"Aprende a gastar",desc:"Registra tu primer gasto virtual o compra.",xp:15,check:s=>s.expenses>0},
+{id:"save_100",title:"Pequeño ahorrador",desc:"Alcanza un saldo de S/100 virtuales.",xp:25,check:s=>s.balance>=100},
+{id:"set_goal",title:"Sueño definido",desc:"Guarda un objetivo económico.",xp:15,check:s=>s.goal.name!=="Mi primer objetivo"||s.goal.target!==500},
+{id:"first_job",title:"Primer día de trabajo",desc:"Completa un turno de trabajo.",xp:20,check:s=>(s.workCount||0)>0},
+{id:"business_owner",title:"Emprendedor",desc:"Compra tu primer negocio.",xp:30,check:s=>s.businesses.length>0},
+{id:"first_purchase",title:"Primera compra",desc:"Compra un objeto de la tienda.",xp:15,check:s=>s.inventory.length>0}
+];const list=document.getElementById("missionList");list.innerHTML=missions.map(m=>{const done=state.completedMissions.includes(m.id),ready=m.check(state);return `<div class="item"><div style="min-width:0"><div class="item-title">${done?"✓ ":""}${m.title}</div><div class="item-meta">${m.desc} · Recompensa: ${m.xp} XP</div></div><button class="btn ${done?"":"good"}" data-claim="${m.id}" ${done||!ready?"disabled":""}>${done?"Completada":ready?"Reclamar XP":"En progreso"}</button></div>`;}).join("");list.querySelectorAll("[data-claim]").forEach(btn=>btn.addEventListener("click",()=>{const m=missions.find(x=>x.id===btn.dataset.claim);if(!m||state.completedMissions.includes(m.id)||!m.check(state))return;state.completedMissions.push(m.id);addXP(m.xp);saveState();render();showToast("Misión completada: +"+m.xp+" XP");}));}
+function renderMovements(){const makeItem=m=>`<div class="item"><div style="min-width:0"><div class="item-title">${escapeHTML(m.description)}</div><div class="item-meta">${escapeHTML(m.date)} · ${m.type==="income"?"Ganancia":"Gasto"}</div></div><strong class="${m.type==="income"?"green":"red"}">${m.type==="income"?"+":"−"}${money(m.amount)}</strong></div>`;const recent=document.getElementById("recentList"),history=document.getElementById("historyList");recent.innerHTML=state.movements.length?state.movements.slice(0,4).map(makeItem).join(""):'<div class="empty">Todavía no hay movimientos. Prueba un trabajo o registra una ganancia.</div>';history.innerHTML=state.movements.length?state.movements.map(makeItem).join(""):'<div class="empty">No hay movimientos registrados.</div>';}
+function render(){setText("balanceStat",money(state.balance));setText("incomeStat",money(state.income));setText("expenseStat",money(state.expenses));setText("balanceSummary",money(state.balance));setText("incomeSummary",money(state.income));setText("expenseSummary",money(state.expenses));setText("netSummary",money(state.income-state.expenses));setText("levelStat","Nivel "+state.level);setText("xpText",state.xp+" / 100 XP");document.getElementById("xpBar").style.width=state.xp+"%";setText("homeGoalName",state.goal.name);setText("homeGoalHint","Sigue avanzando para completar tu meta.");setText("goalTarget","Meta: "+money(state.goal.target));setText("goalPageTarget","Objetivo: "+money(state.goal.target));setText("goalSaved",money(state.balance)+" disponibles");setText("goalPageBalance","Saldo: "+money(state.balance));const pct=state.goal.target>0?Math.min(100,Math.max(0,state.balance/state.goal.target*100)):0;setText("goalPercent",Math.floor(pct)+"%");setText("goalPagePercent",Math.floor(pct)+"%");document.getElementById("goalBar").style.width=pct+"%";document.getElementById("goalPageBar").style.width=pct+"%";setText("goalStatus",pct>=100?"¡Objetivo alcanzado! Puedes crear una nueva meta cuando quieras.":"Te faltan "+money(Math.max(0,state.goal.target-state.balance))+" para alcanzar tu objetivo.");const job=jobs.find(j=>j.id===state.activeJob);setText("careerTitle",job?job.name:"Sin empleo activo");setText("careerText",job?"Último trabajo elegido: "+job.name+". Completa más turnos para aumentar tus ganancias.":"Elige un trabajo para ganar dinero virtual.");renderMovements();renderMissions();renderBusinesses();renderShop();renderInventory();}
+function goTab(tab){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id==="tab-"+tab));document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));window.scrollTo({top:0,behavior:"smooth"});}
+document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>goTab(b.dataset.tab)));document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>goTab(b.dataset.go)));
+document.getElementById("addMovement").addEventListener("click",()=>{const type=document.getElementById("moveType").value,amount=Number(document.getElementById("moveAmount").value),description=document.getElementById("moveDescription").value.trim()||(type==="income"?"Ganancia virtual":"Gasto virtual");if(!Number.isFinite(amount)||amount<=0||amount>1000000){showToast("Escribe una cantidad mayor que cero y menor o igual a S/1,000,000.");return;}if(type==="expense"&&amount>state.balance){showToast("Saldo insuficiente. Registra una ganancia antes del gasto.");return;}addMovement(type,Math.round(amount*100)/100,description.slice(0,70));document.getElementById("moveAmount").value="";document.getElementById("moveDescription").value="";showToast(type==="income"?"Ganancia registrada. ¡Buen trabajo!":"Gasto registrado correctamente.");});
+document.getElementById("saveGoal").addEventListener("click",()=>{const name=document.getElementById("goalName").value.trim(),target=Number(document.getElementById("goalAmount").value);if(!name){showToast("Escribe un nombre para tu objetivo.");return;}if(!Number.isFinite(target)||target<=0||target>10000000){showToast("Escribe un precio objetivo válido.");return;}state.goal={name:name.slice(0,55),target:Math.round(target*100)/100};addXP(5);saveState();render();showToast("Objetivo guardado. +5 XP");});
+document.getElementById("buyBusiness").addEventListener("click",()=>{const type=document.getElementById("businessType").value,b=businessTypes[type];if(!b)return;if(state.balance<b.cost){showToast("Necesitas "+money(b.cost)+" para comprar este negocio.");return;}state.balance-=b.cost;state.expenses+=b.cost;state.businesses.push({...b,id:type+"_"+Date.now(),purchasedAt:now()});state.movements.unshift({id:Date.now()+Math.random(),type:"expense",amount:b.cost,description:"Inversión: "+b.name,date:now()});addXP(8);saveState();render();showToast("¡Negocio comprado! Ya puedes cobrar sus ganancias virtuales.");});
+document.getElementById("clearHistory").addEventListener("click",()=>{if(!confirm("¿Seguro que quieres reiniciar toda la partida local? Se borrarán saldo, movimientos, nivel, objetivo, negocios, inventario y misiones."))return;state=defaults();saveState();render();showToast("Partida reiniciada.");});
+const tutorialSteps=[
+{title:"Bienvenido a MONEY LIFE",body:"Esta es la segunda fase de tu simulador. Conservamos tu saldo, nivel, objetivos, movimientos y misiones de la Fase 1."},
+{title:"Trabaja para ganar",body:"En Trabajos puedes elegir empleos ficticios y completar turnos para recibir dinero virtual y experiencia."},
+{title:"Crea un negocio",body:"En Negocios puedes comprar un pequeño negocio si tienes saldo suficiente y cobrar sus ganancias virtuales cuando quieras."},
+{title:"Compra y colecciona",body:"La Tienda ofrece objetos que se guardan en Inventario. Todo es parte de la simulación y no representa dinero real."}
+];let tutorialIndex=0;const modal=document.getElementById("tutorialModal");
+function openTutorial(){tutorialIndex=0;showTutorialStep();modal.classList.add("show");}
+function showTutorialStep(){const s=tutorialSteps[tutorialIndex];setText("tutorialTitle",s.title);setText("tutorialBody",s.body);setText("tutorialCount",(tutorialIndex+1)+"/"+tutorialSteps.length);document.getElementById("tutorialBar").style.width=((tutorialIndex+1)/tutorialSteps.length*100)+"%";setText("nextTutorial",tutorialIndex===tutorialSteps.length-1?"¡Empezar a jugar!":"Siguiente →");}
+function closeTutorial(){modal.classList.remove("show");state.tutorialSeen=true;saveState();}
+document.getElementById("startTutorial").addEventListener("click",openTutorial);document.getElementById("skipTutorial").addEventListener("click",closeTutorial);document.getElementById("nextTutorial").addEventListener("click",()=>{if(tutorialIndex<tutorialSteps.length-1){tutorialIndex++;showTutorialStep();}else{closeTutorial();goTab("inicio");showToast("Tutorial completado. ¡A jugar!");}});
+renderJobs();render();if(!state.tutorialSeen)openTutorial();
 })();
 </script>
 </body>
